@@ -1,0 +1,40 @@
+{
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "googletest.failed",
+                "settings": {
+                    "foreground": "#f00"
+                }
+            },
+            {
+                "scope": "googletest.passed",
+                "settings": {
+                    "foreground": "#0f0"
+                }
+            },
+            {
+                "scope": "googletest.run",
+                "settings": {
+                    "foreground": "#0f0"
+                }
+            }
+        ]
+    },
+    "files.associations": {
+        "stdlib.h": "c",
+        "stdio.h": "c",
+        "ctime": "cpp",
+        "pch.h": "c",
+        "time.h": "c",
+        "assert.h": "c",
+        "math.h": "c",
+        "signal.h": "c",
+        "complex.h": "c",
+        "tgmath.h": "c",
+        "test1.h": "c",
+        "test3.h": "c",
+        "string.h": "c",
+        "iostream": "c"
+    }
+}
