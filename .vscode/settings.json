@@ -23,7 +23,6 @@
     },
     "editor.lineHeight":20,
     "workbench.colorTheme": "Default Dark+",
-    "editor.fontFamily":  "'JetBrains Mono','Cascadia Code','Fira Code','Consolas', 'IBM Plex Mono', 'Ubuntu Mono', 'monospace', monospace",
 
     "files.associations": {
         "stdlib.h": "c",
@@ -44,5 +43,7 @@
         "string": "c",
         "test2.h": "c",
         "corecrt_math.h": "c"
-    }
+    },
+    "terminal.integrated.shell.windows": "C:/WINDOWS/System32/wsl.exe",
+    "editor.fontSize": 15
 }

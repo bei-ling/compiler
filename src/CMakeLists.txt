@@ -6,9 +6,6 @@ add_executable(${PROJECT_NAME}
 	${INC_FILE}
 )
 
-set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CMAKE_COMMAND} -E time")
-set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK "${CMAKE_COMMAND} -E time")
-
 # cotire
 # issue: https://github.com/sakra/cotire/issues/17
 # set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

@@ -10,6 +10,7 @@ if __name__ == '__main__':
     combined_data = []
     for filename in sys.argv[1:]:
         with open(filename, 'r') as f:
+            print(filename)
             file_time = None
             for event in json.load(f)['traceEvents']:
                 # Skip metadata events
