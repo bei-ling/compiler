@@ -1,3 +1,6 @@
+#ifndef TEST_3
+#define TEST_3
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,3 +12,5 @@
 #include <math.h>
 #include <iostream>
 #include <string>
+
+#endif

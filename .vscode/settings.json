@@ -21,6 +21,9 @@
             }
         ]
     },
+    "workbench.colorTheme": "Default Dark+",
+    "editor.fontFamily":  "'JetBrains Mono','Cascadia Code','Fira Code','Consolas', 'IBM Plex Mono', 'Ubuntu Mono', 'monospace', monospace",
+
     "files.associations": {
         "stdlib.h": "c",
         "stdio.h": "c",
@@ -35,6 +38,9 @@
         "test1.h": "c",
         "test3.h": "c",
         "string.h": "c",
-        "iostream": "c"
+        "iostream": "c",
+        "test4.h": "c",
+        "string": "c",
+        "test2.h": "c"
     }
 }
