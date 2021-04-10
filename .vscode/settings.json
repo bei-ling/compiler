@@ -21,6 +21,7 @@
             }
         ]
     },
+    "editor.lineHeight":20,
     "workbench.colorTheme": "Default Dark+",
     "editor.fontFamily":  "'JetBrains Mono','Cascadia Code','Fira Code','Consolas', 'IBM Plex Mono', 'Ubuntu Mono', 'monospace', monospace",
 
@@ -41,6 +42,7 @@
         "iostream": "c",
         "test4.h": "c",
         "string": "c",
-        "test2.h": "c"
+        "test2.h": "c",
+        "corecrt_math.h": "c"
     }
 }
