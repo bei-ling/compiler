@@ -25,7 +25,7 @@ if __name__ == '__main__':
                     # Find how long this compilation takes
                     file_time = event['dur']
                     # Set the file name in ExecuteCompiler
-                    event['args']['detail'] = filename
+                    # event['args']['detail'] = filename
  
                 # Offset start time to make compiles sequential
                 event['ts'] += start_time
