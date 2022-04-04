@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.10)
 set (CMAKE_C_COMPILER "/usr/bin/gcc")
 set (CMAKE_CXX_COMPILER "/usr/bin/g++")
 
-set (PROJECT_NAME "c_compiler")
+set (PROJECT_NAME "c_compiler.exe")
 project (${PROJECT_NAME})
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
