@@ -42,7 +42,8 @@
         "test4.h": "c",
         "string": "c",
         "test2.h": "c",
-        "corecrt_math.h": "c"
+        "corecrt_math.h": "c",
+        "fstream": "cpp"
     },
     "terminal.integrated.shell.windows": "C:/WINDOWS/System32/wsl.exe",
     "editor.fontSize": 15

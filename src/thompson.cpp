@@ -237,7 +237,7 @@ void InitConstructInfo()
     op_stack.top = 0;
     data_stack.top = 0;
 
-    priority['('] = 0;
+    priority['('] = 4;
     priority[')'] = 4;
     priority['|'] = 1;
     priority['+'] = 2;
