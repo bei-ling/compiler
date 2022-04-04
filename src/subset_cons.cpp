@@ -71,7 +71,7 @@ void PrintDfaStateResult(vector<DfaTable> &nfaTableResult,
     std::set<int>::iterator it;
     map<char, char> NState;
 
-    of.open("/mnt/c/Users/MrTree/Desktop/nextsql/py_code/input.txt", std::ios::out);
+    of.open("../py_code/input.txt", std::ios::out);
 
     printf("================================================================\n");
     printf("%10s %10s %10s %20s\n", "BEGIN", "TRANS", "END", "STATE NUMBER");
