@@ -1,9 +1,8 @@
 
-
-#include "test.h"
+#include <stdio.h>
 int main(int argc, char** argv)
 {
 
-    read_file();
+    printf("hello world!\n");
     return 0;
 }
