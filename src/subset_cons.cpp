@@ -122,7 +122,7 @@ void RegSearchInputs(int begin, int end, vector<string>& inputs)
             next = DfaTableGrap[next][inputs[i][j]];
             j += 1;
         }
-        if (DfaTableGrap[next][inputs[i][j]] == end) {
+        if (j == inputs[i].size() - 1 && DfaTableGrap[next][inputs[i][j]] == end) {
             printf(" -> SUCCESS!\n");
         } else {
             printf("\n");

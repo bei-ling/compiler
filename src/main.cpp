@@ -10,8 +10,8 @@ int main(int argc, char** argv)
 
     inputs.push_back("thb");
     inputs.push_back("mb");
-    inputs.push_back("ththbs");
-    inputs.push_back("thbs");
+    inputs.push_back("#desine");
+    inputs.push_back("#defines");
     inputs.push_back("#define");
 
     LexParser(pattern, inputs);
