@@ -13,9 +13,10 @@ typedef enum {
     T_R_BRACE,          // }
 
     T_INT,
-    T_EQUAL,            // =
+    T_EQUAL,            // ==
     T_NUMERIC_CONSTANT, // 1
     T_SEMI,             // ; 分号
+    T_ASSIGN,           // = 赋值
 
     T_RETURN,           // return
     T_PLUS,             // +

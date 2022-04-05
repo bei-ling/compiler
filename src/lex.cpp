@@ -12,6 +12,7 @@ unordered_map<TokenType, string> TokenMap = {
     {T_EQUAL, "equal"},
     {T_NUMERIC_CONSTANT, "numeric_constant"},
     {T_SEMI, "semi"},
+    {T_ASSIGN, "assign"},
 
     {T_RETURN, "return"},
     {T_PLUS, "plus"},
@@ -19,21 +20,64 @@ unordered_map<TokenType, string> TokenMap = {
 };
 
 
+ 
+int ProcNumber(char* inputs)
+{
+
+    return SUCCESS;
+}
+
+
+
+int procSemi(char* inputs)
+{
+    return SUCCESS;
+}
+int ProcPlus(char* inputs)
+{
+
+    return SUCCESS;
+}
+
 int next(char* &fileData, int &fileLength)
 {
+
+    char* inputs = fileData;
     for (int i = 0; i < fileLength; ++i) {
-        printf("%c", fileData[i]);
+        printf("%c", *(inputs+i));
+    }
+    while (*inputs != '\0') {
+        switch (*inputs) {
+
+            case '\0': // 字符串开头
+                break;
+
+            case '\n':
+            case ' ': case '(': case ')': case '{': case '}':
+                putchar(*inputs);
+                inputs++;
+                break;
+
+            case '=': case '*':
+            case '+':
+                break;
+
+            case ';':
+                procSemi(inputs);
+    
+
+
+
+            case '0': case '1': case '2': case '3': case '4': case '5':
+            case '6': case '7': case '8': case '9':
+                ProcNumber(inputs);
+            
+            default:
+                inputs++;
+                break;
+        }
     }
 
-
-    // switch (ch) {
-    //     case '':
-            
-    //         break;
-        
-    //     default:
-    //         break;
-    // }
     return SUCCESS;
 }
 
@@ -65,5 +109,6 @@ int LexProc(char filePath[], char* &fileData, int &fileLength)
 {
     FileReadLines(filePath, fileData, fileLength);
     next(fileData, fileLength);
+    free(fileData);
     return SUCCESS;
 }

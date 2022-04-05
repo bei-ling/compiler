@@ -22,7 +22,7 @@
         ]
     },
     "editor.lineHeight":20,
-    "workbench.colorTheme": "Default Dark+",
+    // "workbench.colorTheme": "Default Dark+",
 
     "files.associations": {
         "stdlib.h": "c",

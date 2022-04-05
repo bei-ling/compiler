@@ -226,6 +226,7 @@ int char_proc(char symbol)
             break;
 
         default:
+            
             symbol_proc(symbol);
             break;
     }
