@@ -1,6 +1,5 @@
 
 #include <stdio.h>
-#include "thompson.h"
 #include "lex.h"
 
 int main(int argc, char** argv)
@@ -14,7 +13,6 @@ int main(int argc, char** argv)
     inputs.push_back("ef");
     inputs.push_back("fe");
 
-    LexParser(pattern, inputs);
     char filePath[] = "input.c";
     char *fileData;
     int fileLength;

@@ -44,7 +44,8 @@
         "test2.h": "c",
         "corecrt_math.h": "c",
         "fstream": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "ostream": "cpp"
     },
     "editor.fontSize": 15
 }

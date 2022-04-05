@@ -6,14 +6,19 @@
 
 typedef enum {
 
-    T_INDENTIFIER = 0,
+    T_INDENTIFIER = 1,
+
+    T_IF,
+    T_WHILE,
+
     T_L_PAREN,          // (
-    T_R_PRAEN,          // )
+    T_R_PAREN,          // )
     T_L_BRACE,          // {
     T_R_BRACE,          // }
 
     T_INT,
-    T_EQUAL,            // ==
+    T_EQUAL,            // =
+    T_EQUALEQUAL,  
     T_NUMERIC_CONSTANT, // 1
     T_SEMI,             // ; 分号
     T_ASSIGN,           // = 赋值
@@ -24,10 +29,11 @@ typedef enum {
     
 } TokenType;
 
-
 typedef struct {
-    int x;
-} ToKenInfo; 
+    int row;
+    int col;
+} TokenPosition;
+
 
 int LexProc(char filePath[], char* &fileData, int &fileLength);
 

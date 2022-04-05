@@ -42,5 +42,5 @@ typedef struct State {
 
 int NfaResultPrint();
 int ThompsonConstruct(char inputs[]);
-int LexParser(char pattern[], vector<string> &inputs);
+int LexParser(char pattern[], string &inputs);
 #endif

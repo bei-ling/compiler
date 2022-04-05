@@ -71,18 +71,18 @@ void PrintDfaStateResult(vector<DfaTable> &nfaTableResult,
     std::set<int>::iterator it;
     map<char, char> NState;
 
-    of.open("../py_code/input.txt", std::ios::out);
+    // of.open("../py_code/token.txt", std::ios::out);
 
-    printf("================================================================\n");
-    printf("%10s %10s %10s %20s\n", "BEGIN", "TRANS", "END", "STATE NUMBER");
-    printf("================================================================\n");
+    // printf("================================================================\n");
+    // printf("%10s %10s %10s %20s\n", "BEGIN", "TRANS", "END", "STATE NUMBER");
+    // printf("================================================================\n");
     for (int row = 0; row < nfaTableResult.size(); ++row) {
         set<int> state1 = nfaTableResult[row].beginState;
-        printf("%10d", nfaStateResult[state1]);
-        printf("%10c", nfaTableResult[row].trans);
-        of << nfaStateResult[state1] << ", ";
+        // printf("%10d", nfaStateResult[state1]);
+        // printf("%10c", nfaTableResult[row].trans);
+        // of << nfaStateResult[state1] << ", ";
         set<int> state2 = nfaTableResult[row].endState;
-        printf("%10d %10c", nfaStateResult[state2], ' ');
+        // printf("%10d %10c", nfaStateResult[state2], ' ');
         
         DfaTableGrap[nfaStateResult[state1]][nfaTableResult[row].trans] = nfaStateResult[state2];
 
@@ -90,47 +90,33 @@ void PrintDfaStateResult(vector<DfaTable> &nfaTableResult,
             NState[nfaStateResult[state1]] = 'N';
         }
 
-        for (it = state2.begin(); it != state2.end(); ++it) {
-            printf("%d,", *it);
-        }
-        of << nfaStateResult[state2] << ", " << nfaTableResult[row].trans <<std::endl;
-        printf("\n");
+        // for (it = state2.begin(); it != state2.end(); ++it) {
+        //     printf("%d,", *it);
+        // }
+        // of << nfaStateResult[state2] << ", " << nfaTableResult[row].trans <<std::endl;
+        // printf("\n");
     }
-    of.close();
-    printf("================================================================\n");
-    
-    std::map<set<int>, int>::iterator mit;
-    for (mit = nfaStateResult.begin(); mit != nfaStateResult.end(); ++mit) {
-        if (NState[mit->second] == 'N') {
-            printf("%d -> %c\n", mit->second, 'N');
-        } else {
-            printf("%d -> %c\n", mit->second, 'A');
-        }
-    }
-
+    // of.close();
+    // printf("================================================================\n");
 }
 
 
-void RegSearchInputs(int begin, int end, vector<string>& inputs)
+int RegSearchinput(int begin, int end, string& token)
 {
-    printf("begin: %d, end: %d\n", begin, end);
-    for (int i = 0; i < inputs.size(); ++i) {
-        printf("%s", inputs[i].c_str());
-        int j = 0;
-        int next = begin;
-        while (j < inputs[i].size() && DfaTableGrap[next][inputs[i][j]] != end) {
-            next = DfaTableGrap[next][inputs[i][j]];
-            j += 1;
-        }
-        if (j == inputs[i].size() - 1 && DfaTableGrap[next][inputs[i][j]] == end) {
-            printf(" -> SUCCESS!\n");
-        } else {
-            printf("\n");
-        }
+    int i = 0;
+    int next = begin;
+    while (i < token.size() && DfaTableGrap[next][token[i]] != end) {
+        next = DfaTableGrap[next][token[i]];
+        i += 1;
     }
+    if (i == token.size() - 1 && DfaTableGrap[next][token[i]] == end) {
+        return TRUE;
+    }
+    return FALSE;
+  
 }
 
-void SubSetConstruction(GraphNode** graph, int begin, int end, vector<string>& inputs)
+int SubSetConstruction(GraphNode** graph, int begin, int end, string& token)
 {
     std::set<int>::iterator it;
     map<set<int>, int> markClosure;
@@ -177,5 +163,5 @@ void SubSetConstruction(GraphNode** graph, int begin, int end, vector<string>& i
     }
  
     PrintDfaStateResult(nfaTableResult, nfaStateResult, regState.endState);
-    RegSearchInputs(regState.beginState, regState.endState, inputs);
+    return RegSearchinput(regState.beginState, regState.endState, token);
 }

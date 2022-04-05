@@ -2,7 +2,7 @@
 #include "thompson.h"
 #include "subset_cons.h"
 
-int g_nfaNodeId = 0;
+int g_nfaNodeId;
 
 typedef struct {
     int top;
@@ -18,7 +18,7 @@ unordered_map<char, int> priority;
 OpStack op_stack; 
 DataStack data_stack;
 
-GraphNode* g_nfaGraph[256];
+GraphNode* g_nfaGraph[256] = {0};
 
 
 int proc_CHAR_A_OR_CHAR_B()
@@ -235,6 +235,7 @@ int char_proc(char symbol)
 
 void InitConstructInfo()
 {
+    g_nfaNodeId = 0;
     op_stack.top = 0;
     data_stack.top = 0;
 
@@ -277,16 +278,13 @@ int ThompsonConstruct(char inputs[])
     return SUCCESS;
 }
 
-int LexParser(char pattern[], vector<string> &inputs) 
+int LexParser(char pattern[], string &token) 
 {   
-    printf("pattern: %s\n", pattern);
-
     ThompsonConstruct(pattern);
-    printf("data_stack size: %d\n", data_stack.top);
     NfaState* s = data_top(data_stack);
     data_pop(data_stack);
-    printf("begin: %d, end: %d\n", s->start, s->end);
-    SubSetConstruction(g_nfaGraph, s->start, s->end, inputs);
+    // printf("begin: %d, end: %d\n", s->start, s->end);
+    int result = SubSetConstruction(g_nfaGraph, s->start, s->end, token);
     NfaResultPrint();
-    return 0;
+    return result;
 }
