@@ -21,5 +21,4 @@ using std::ofstream;
 #define SUCCESS 1
 #define FAIL 0
 
-
 #endif

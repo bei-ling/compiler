@@ -5,5 +5,7 @@
 	${CMAKE_CURRENT_SOURCE_DIR}/thompson.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/subset_cons.h
 	${CMAKE_CURRENT_SOURCE_DIR}/subset_cons.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/lex.h
+	${CMAKE_CURRENT_SOURCE_DIR}/lex.cpp
 	main.cpp
 )
