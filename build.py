@@ -1,5 +1,6 @@
 from email.mime import base
 import os
+import time
 
 base_path = os.path.dirname(os.path.abspath(__file__))
 target_path = os.path.join(base_path, "target")
@@ -18,4 +19,7 @@ def build():
     os.chdir(base_path)
     os.system("cd target && ./c_compiler.exe")
 
+start_time = time.time()
 build()
+end_time = time.time()
+print("build time cost: {}s".format(end_time - start_time))

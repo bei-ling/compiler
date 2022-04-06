@@ -104,7 +104,7 @@ int next(char* &fileData, int &fileLength)
 {
 
     char* inputs = fileData;
- 
+
     while (*inputs != '\0') {
         switch (*inputs) {
         
