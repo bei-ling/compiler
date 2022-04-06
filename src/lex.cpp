@@ -104,9 +104,7 @@ int next(char* &fileData, int &fileLength)
 {
 
     char* inputs = fileData;
-    // for (int i = 0; i < fileLength; ++i) {
-    //     printf("%c", *(inputs+i));
-    // }
+ 
     while (*inputs != '\0') {
         switch (*inputs) {
         
@@ -139,7 +137,6 @@ int next(char* &fileData, int &fileLength)
                 proc_T_PAREN_BRACE(*inputs);
                 inputs++;
                 break;
-
 
             default:
                 if ((*inputs >= 'a' && *inputs <= 'z') || (*inputs >= 'A' && *inputs <= 'Z') ||
