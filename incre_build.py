@@ -53,4 +53,4 @@ def start():
  
 os.system("cd {} ; rm -r build/*".format(base_path))
 start()
-# os.chdir(build_path)
+# backup()
