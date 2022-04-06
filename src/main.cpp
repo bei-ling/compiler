@@ -18,6 +18,6 @@ int main(int argc, char** argv)
     int fileLength;
     
     LexProc(filePath, fileData, fileLength);
-    printf("hello world");
+    printf("hello world\n");
     return 0;
 }

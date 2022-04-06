@@ -25,7 +25,6 @@ def list_all_files(rootdir: str) -> list:
 def backup():
 
     incre_files = list_all_files(build_path)
-    # os.system("cd build ninja -t restat")\
     os.chdir(build_path)
 
     for file_path in incre_files:
@@ -33,7 +32,7 @@ def backup():
         file_dir = os.path.dirname(copy_path)
         if not os.path.exists(file_dir):
             os.makedirs(file_dir)
-        shutil.copy(file_path, copy_path)
+        os.system("cp -p {} {}".format(file_path, copy_path))
         print("--", copy_path)
     print("-- backup success!")
 
@@ -48,11 +47,10 @@ def start():
         if not os.path.exists(file_dir):
             print(file_dir)
             os.makedirs(file_dir)
-        shutil.copy(file_path, copy_path)
+        os.system("cp -p {} {}".format(file_path, copy_path))
         print("--", copy_path)
+
+ 
 os.system("cd {} ; rm -r build/*".format(base_path))
 start()
-os.chdir(build_path)
-# os.system("ninja -t restat")
-# os.chdir(base_path)
-# os.system("python3 build.py")
+# os.chdir(build_path)
