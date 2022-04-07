@@ -3,7 +3,6 @@
 
 #define MARKED 1
 #define UNMARK 2
-#define DFA_FIRST_STATE 1
 
 int DfaTableGrap[256][256] = {0};
 
@@ -62,82 +61,74 @@ int GetUnMarkClosure(map<set<int>, int> &markClosure, set<int>& beginState)
 }
 
 
-void PrintDfaStateResult(vector<DfaTable> &nfaTableResult,
-                        map<set<int>, int> &nfaStateResult,
-                        int endState)
+void PrintDfaStateResult(vector<DfaTable> &nfaTableResult, map<set<int>, int> &nfaStateResult)
 {
-
     std::ofstream  of;
+    set<int> state;
     std::set<int>::iterator it;
-    map<char, char> NState;
+    of.open("../py_code/input.txt", std::ios::out);
 
-    // of.open("../py_code/token.txt", std::ios::out);
-
-    // printf("================================================================\n");
-    // printf("%10s %10s %10s %20s\n", "BEGIN", "TRANS", "END", "STATE NUMBER");
-    // printf("================================================================\n");
+    printf("================================================================\n");
+    printf("%10s %10s %10s %20s\n", "BEGIN", "TRANS", "END", "STATE NUMBER");
+    printf("================================================================\n");
     for (int row = 0; row < nfaTableResult.size(); ++row) {
-        set<int> state1 = nfaTableResult[row].beginState;
-        // printf("%10d", nfaStateResult[state1]);
-        // printf("%10c", nfaTableResult[row].trans);
-        // of << nfaStateResult[state1] << ", ";
-        set<int> state2 = nfaTableResult[row].endState;
-        // printf("%10d %10c", nfaStateResult[state2], ' ');
+        state = nfaTableResult[row].beginState;
+        printf("%10d", nfaStateResult[state]);
+        printf("%10c", nfaTableResult[row].trans);
+        of << nfaStateResult[state] << ", ";
+        state = nfaTableResult[row].endState;
+        printf("%10d %10c", nfaStateResult[state], ' ');
         
-        DfaTableGrap[nfaStateResult[state1]][nfaTableResult[row].trans] = nfaStateResult[state2];
-
-        if (nfaStateResult[state2] == endState) {
-            NState[nfaStateResult[state1]] = 'N';
+        for (it = state.begin(); it != state.end(); ++it) {
+            printf("%d,", *it);
         }
-
-        // for (it = state2.begin(); it != state2.end(); ++it) {
-        //     printf("%d,", *it);
-        // }
-        // of << nfaStateResult[state2] << ", " << nfaTableResult[row].trans <<std::endl;
-        // printf("\n");
+        of << nfaStateResult[state] << ", " << nfaTableResult[row].trans <<std::endl;
+        printf("\n");
     }
-    // of.close();
-    // printf("================================================================\n");
+    of.close();
+    printf("================================================================\n");
 }
 
-
-int RegSearchinput(int begin, int end, string& token)
+void RegSearchInputs(int begin, int end, vector<string>& inputs)
 {
-    int i = 0;
-    int next = begin;
-    while (i < token.size() && DfaTableGrap[next][token[i]] != end) {
-        next = DfaTableGrap[next][token[i]];
-        i += 1;
+    printf("begin: %d, end: %d\n", begin, end);
+    for (int i = 0; i < inputs.size(); ++i) {
+        printf("%s", inputs[i].c_str());
+        int j = 0;
+        int next = begin;
+        while (j < inputs[i].size() && DfaTableGrap[next][inputs[i][j]] != end) {
+            next = DfaTableGrap[next][inputs[i][j]];
+            j += 1;
+        }
+        if (j == inputs[i].size() - 1 && DfaTableGrap[next][inputs[i][j]] == end) {
+            printf(" -> SUCCESS!\n");
+        } else {
+            printf("\n");
+        }
     }
-    if (i == token.size() - 1 && DfaTableGrap[next][token[i]] == end) {
-        return TRUE;
-    }
-    return FALSE;
-  
 }
 
-int SubSetConstruction(GraphNode** graph, int begin, int end, string& token)
+void SubSetConstruction(GraphNode** graph, int begin, int end, vector<string>& inputs)
 {
     std::set<int>::iterator it;
     map<set<int>, int> markClosure;
     set<int> closure;
     vector<DfaTable> nfaTableResult;
     map<set<int>, int> nfaStateResult;
-    DFARegState regState;
     
     GetNodeEpsilonState(closure, graph, begin);
     markClosure[closure] = UNMARK;
     set<int> beginState;
-    int dfaState = DFA_FIRST_STATE;
-    regState.beginState = dfaState;
+    int dfaState = 1;
+    int dfaEndState;
     while (GetUnMarkClosure(markClosure, beginState)) {   
         if (!nfaStateResult[beginState]) {
             nfaStateResult[beginState] = dfaState;
-            regState.endState = dfaState;
+            dfaEndState = dfaState;
             dfaState++;
         }
         markClosure[beginState] = MARKED;
-        for (int trans = 0; trans <= 255; ++trans) { // ASSIC码表为0-255
+        for (int trans = 'a'; trans <= 'z'; ++trans) {
             set<int> endState;
             for (it = beginState.begin(); it != beginState.end(); ++it) {
                 if (graph[*it]->firstEdge == NULL) {
@@ -161,7 +152,7 @@ int SubSetConstruction(GraphNode** graph, int begin, int end, string& token)
             }
         }
     }
- 
-    PrintDfaStateResult(nfaTableResult, nfaStateResult, regState.endState);
-    return RegSearchinput(regState.beginState, regState.endState, token);
+    printf("s: %c, t: %c\n", char(dfaState), char(dfaEndState));
+    PrintDfaStateResult(nfaTableResult, nfaStateResult);
+    RegSearchInputs(1, dfaEndState, inputs);
 }

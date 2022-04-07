@@ -19,5 +19,5 @@ typedef struct DFARegState {
 } DFARegState;
 
 
-int SubSetConstruction(GraphNode** graph, int start, int end, string& inputs);
+void SubSetConstruction(GraphNode** graph, int begin, int end, vector<string>& inputs);
 #endif

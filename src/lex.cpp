@@ -187,5 +187,6 @@ int LexProc(char filePath[], char* &fileData, int &fileLength)
     FileReadLines(filePath, fileData, fileLength);
     next(fileData, fileLength);
     free(fileData);
+    
     return SUCCESS;
 }

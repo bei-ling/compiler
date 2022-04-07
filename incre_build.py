@@ -48,7 +48,7 @@ def start():
             print(file_dir)
             os.makedirs(file_dir)
         # -p很重要,需要每次保证拷贝的ninja文件时间戳保持一致
-        os.system("cp -p {} {}".format(file_path, copy_path))
+        os.system("cp {} {}".format(file_path, copy_path))
         print("--", copy_path)
 
  

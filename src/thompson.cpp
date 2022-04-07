@@ -2,7 +2,7 @@
 #include "thompson.h"
 #include "subset_cons.h"
 
-int g_nfaNodeId;
+int g_nfaNodeId = 0;
 
 typedef struct {
     int top;
@@ -18,7 +18,7 @@ unordered_map<char, int> priority;
 OpStack op_stack; 
 DataStack data_stack;
 
-GraphNode* g_nfaGraph[256] = {0};
+GraphNode* g_nfaGraph[256];
 
 
 int proc_CHAR_A_OR_CHAR_B()
@@ -129,6 +129,7 @@ int proc_CHAR_A_CONC_CHAR_B()
     state->start = s2->start;
     state->end = s1->end;
     state->type = CHAR_A_CONC_CHAR_B;
+ 
     data_push(data_stack, state);
     return 0;
 }
@@ -221,12 +222,12 @@ int char_proc(char symbol)
         case '*':
             proc_op(symbol);
             break;
+            
         case '+':
             op_detect(symbol);
             break;
 
         default:
-            
             symbol_proc(symbol);
             break;
     }
@@ -235,29 +236,29 @@ int char_proc(char symbol)
 
 void InitConstructInfo()
 {
-    g_nfaNodeId = 0;
     op_stack.top = 0;
     data_stack.top = 0;
 
-    priority['('] = 4;
+    priority['('] = 0;
     priority[')'] = 4;
     priority['|'] = 1;
     priority['+'] = 2;
     priority['*'] = 3;
 }
  
-int NfaResultPrint()
+int NfaResultPrint(GraphNode** graph, int g_nfaNodeId)
 {   
+    printf("\n----------RESULT----------\n");
     for (int i = 0; i < g_nfaNodeId; ++i) {
-        GraphEdge* edge = g_nfaGraph[i]->firstEdge;
+        GraphEdge* edge = graph[i]->firstEdge;
         GraphEdge* p;
         while (edge != NULL ) {
-            // printf("%d, %d, %c\n", i, edge->vex, edge->value);
+            printf("%d, %d, %c\n", i, edge->vex, edge->value);
             p = edge;
             edge = edge->next;
             free(p);
         }
-        free(g_nfaGraph[i]);
+        free(graph[i]);
     }
     return SUCCESS;
 }
@@ -268,6 +269,7 @@ int ThompsonConstruct(char inputs[])
     InitConstructInfo();
     for (int i = 0; i < strlen(inputs) || (op_stack.top != 0); ++i) {
         if (i < strlen(inputs)) {
+            printf("-- %c\n", inputs[i]);
             char_proc(inputs[i]);
             continue;
         }
@@ -278,13 +280,17 @@ int ThompsonConstruct(char inputs[])
     return SUCCESS;
 }
 
-int LexParser(char pattern[], string &token) 
+int LexParse(char pattern[], vector<string> &inputs) 
 {   
+ 
+    printf("pattern: %s\n", pattern);
     ThompsonConstruct(pattern);
+    printf("data_stack size: %d\n", data_stack.top);
     NfaState* s = data_top(data_stack);
     data_pop(data_stack);
-    // printf("begin: %d, end: %d\n", s->start, s->end);
-    int result = SubSetConstruction(g_nfaGraph, s->start, s->end, token);
-    NfaResultPrint();
-    return result;
+    printf("begin: %d, end: %d\n", s->start, s->end);
+    SubSetConstruction(g_nfaGraph, s->start, s->end, inputs);
+    NfaResultPrint(g_nfaGraph, g_nfaNodeId);
+ 
+    return 0;
 }
