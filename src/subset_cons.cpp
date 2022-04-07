@@ -64,7 +64,7 @@ int GetUnMarkClosure(map<set<int>, int> &markClosure, set<int>& beginState)
 void PrintDfaStateResult(vector<DfaTable> &nfaTableResult, map<set<int>, int> &nfaStateResult)
 {
     std::ofstream  of;
-    set<int> state;
+    set<int> state1, state2;
     std::set<int>::iterator it;
     of.open("../py_code/input.txt", std::ios::out);
 
@@ -72,17 +72,19 @@ void PrintDfaStateResult(vector<DfaTable> &nfaTableResult, map<set<int>, int> &n
     printf("%10s %10s %10s %20s\n", "BEGIN", "TRANS", "END", "STATE NUMBER");
     printf("================================================================\n");
     for (int row = 0; row < nfaTableResult.size(); ++row) {
-        state = nfaTableResult[row].beginState;
-        printf("%10d", nfaStateResult[state]);
+        state1 = nfaTableResult[row].beginState;
+        printf("%10d", nfaStateResult[state1]);
         printf("%10c", nfaTableResult[row].trans);
-        of << nfaStateResult[state] << ", ";
-        state = nfaTableResult[row].endState;
-        printf("%10d %10c", nfaStateResult[state], ' ');
+        of << nfaStateResult[state1] << ", ";
+        state2 = nfaTableResult[row].endState;
+        printf("%10d %10c", nfaStateResult[state2], ' ');
+
+        DfaTableGrap[nfaStateResult[state1]][nfaTableResult[row].trans] = nfaStateResult[state2];
         
-        for (it = state.begin(); it != state.end(); ++it) {
+        for (it = state2.begin(); it != state2.end(); ++it) {
             printf("%d,", *it);
         }
-        of << nfaStateResult[state] << ", " << nfaTableResult[row].trans <<std::endl;
+        of << nfaStateResult[state2] << ", " << nfaTableResult[row].trans <<std::endl;
         printf("\n");
     }
     of.close();
@@ -96,11 +98,13 @@ void RegSearchInputs(int begin, int end, vector<string>& inputs)
         printf("%s", inputs[i].c_str());
         int j = 0;
         int next = begin;
-        while (j < inputs[i].size() && DfaTableGrap[next][inputs[i][j]] != end) {
+        while (j < inputs[i].size() && next) {
             next = DfaTableGrap[next][inputs[i][j]];
+            // printf("next: %d\n", next);
             j += 1;
         }
-        if (j == inputs[i].size() - 1 && DfaTableGrap[next][inputs[i][j]] == end) {
+        
+        if (j == inputs[i].size() && next) {
             printf(" -> SUCCESS!\n");
         } else {
             printf("\n");

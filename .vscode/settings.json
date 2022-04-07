@@ -46,7 +46,13 @@
         "fstream": "cpp",
         "iosfwd": "cpp",
         "ostream": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp"
     },
     "editor.fontSize": 15
 }
