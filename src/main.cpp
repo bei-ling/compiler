@@ -17,13 +17,16 @@ int main(int argc, char** argv)
     inputs.push_back("accc");
     inputs.push_back("aed");
 
+    LexParse(pattern, inputs);
+    printf("------------------");
+    printf("------------------\n");
     char filePath[] = "input.c";
     char *fileData;
     int fileLength;
     
-    // LexProc(filePath, fileData, fileLength);
+    LexProc(filePath, fileData, fileLength);
 
-    LexParse(pattern, inputs);
+
  
     return 0;
 }
