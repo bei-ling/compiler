@@ -248,18 +248,23 @@ void InitConstructInfo()
  
 int NfaResultPrint(GraphNode** graph, int g_nfaNodeId)
 {   
-    printf("\n----------RESULT----------\n");
+    std::ofstream  of;
+    of.open("../py_code/nfa.txt", std::ios::out);
+
+    printf("\n----------NFA RESULT----------\n");
     for (int i = 0; i < g_nfaNodeId; ++i) {
         GraphEdge* edge = graph[i]->firstEdge;
         GraphEdge* p;
         while (edge != NULL ) {
             printf("%d, %d, %c\n", i, edge->vex, edge->value);
+            of << i << ", " << edge->vex << ", " << edge->value << endl;
             p = edge;
             edge = edge->next;
             free(p);
         }
         free(graph[i]);
     }
+    of.close();
     return SUCCESS;
 }
 

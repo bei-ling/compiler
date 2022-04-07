@@ -3,6 +3,7 @@
 
 #define MARKED 1
 #define UNMARK 2
+#define DFA_BEGIN_STATE 1
 
 int DfaTableGrap[256][256] = {0};
 
@@ -66,8 +67,8 @@ void PrintDfaStateResult(vector<DfaTable> &nfaTableResult, map<set<int>, int> &n
     std::ofstream  of;
     set<int> state1, state2;
     std::set<int>::iterator it;
-    of.open("../py_code/input.txt", std::ios::out);
-
+    of.open("../py_code/dfa.txt", std::ios::out);
+    printf("\n----------DFA RESULT----------\n");
     printf("================================================================\n");
     printf("%10s %10s %10s %20s\n", "BEGIN", "TRANS", "END", "STATE NUMBER");
     printf("================================================================\n");
@@ -123,7 +124,7 @@ void SubSetConstruction(GraphNode** graph, int begin, int end, vector<string>& i
     GetNodeEpsilonState(closure, graph, begin);
     markClosure[closure] = UNMARK;
     set<int> beginState;
-    int dfaState = 1;
+    int dfaState = DFA_BEGIN_STATE;
     int dfaEndState;
     while (GetUnMarkClosure(markClosure, beginState)) {   
         if (!nfaStateResult[beginState]) {
@@ -156,7 +157,6 @@ void SubSetConstruction(GraphNode** graph, int begin, int end, vector<string>& i
             }
         }
     }
-    printf("s: %c, t: %c\n", char(dfaState), char(dfaEndState));
     PrintDfaStateResult(nfaTableResult, nfaStateResult);
-    RegSearchInputs(1, dfaEndState, inputs);
+    RegSearchInputs(DFA_BEGIN_STATE, dfaEndState, inputs);
 }

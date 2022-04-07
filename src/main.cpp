@@ -18,15 +18,10 @@ int main(int argc, char** argv)
     inputs.push_back("aed");
 
     LexParse(pattern, inputs);
-    printf("------------------");
-    printf("------------------\n");
+  
     char filePath[] = "input.c";
     char *fileData;
-    int fileLength;
-    
+    int fileLength;    
     LexProc(filePath, fileData, fileLength);
-
-
- 
     return 0;
 }
